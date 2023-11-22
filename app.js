@@ -40,9 +40,14 @@ app.use(cookieParser(process.env.SECRETKEY_KEY_F_COOKIE))
 // app static  
  app.use(express.static(__dirname + "/public"))
      
+app.get("/",(req,res)=>{
+   res.send("App is runnig") 
+})
 app.use("/user", require("./Routes/User"))
 
 app.use("/course", require("./Routes/Course"))
+
+
 
 app.use((req,res,next,err)=>{
    if(err){
