@@ -16,7 +16,7 @@ const Userlogin  = async (req,res,) =>{
                           // json web token 
                          const token =  sign(daatforCookie,process.env.SECRETKEY_KEY_F_JWT,{expiresIn:process.env.EXPIRE_TIME})
                          // Cookie set 
-                         res.cookie(process.env.APP_NAME,token,{ maxAge: process.env.EXPIRE_TIME,signed:true ,httpOnly: true , secure: true})
+                         res.cookie(process.env.APP_NAME,token,{ maxAge: process.env.EXPIRE_TIME,signed:true ,httpOnly: true , secure: true ,sameSite: 'None'})
                         //response send 
                          res.status(200).json({success:true,user:dataforClient})
                        
