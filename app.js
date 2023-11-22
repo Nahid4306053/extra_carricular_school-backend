@@ -13,18 +13,11 @@ mongoose.connect(process.env.MONGODB_URI).then(()=>{
 })
 
 //Set for cros origin 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', ['http://localhost:5173']);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
-    res.header('Access-Control-Allow-Headers', ['Content-Type']); 
-    next();
-  });
-  
+
 // cors origin set 
 app.use(cors({
     origin: ['http://localhost:5173'],
     credentials: true,
-    sameSite: 'none'
 }));
 
 
