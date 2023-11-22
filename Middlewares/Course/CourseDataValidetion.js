@@ -37,7 +37,7 @@ const courseDatavalidetionResult = (req, res, next) => {
         const filename = req.files[0].filename;
         fs.unlink(path.join(__dirname, "/../../public/uploads/courseThumnail/", filename), (err) => {
             if (err) {
-                res.status("200").json({error:{server:{msg:"Three are a server side error"}}})
+                res.status(200).json({error:{server:{msg:"Three are a server side error"}}})
                 console.log(err)
             } else {
                 const mappedErrors = errors.mapped()

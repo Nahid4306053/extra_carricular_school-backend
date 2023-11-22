@@ -42,7 +42,7 @@ const uservalidetionResult = (req,res,next) =>{
                res.status(500).json({error:{server:{msg:"There is server side"}}})     
             }
             else{
-             res.status("200").json({
+             res.status(200).json({
                   error:mappedError
              })       
             }
