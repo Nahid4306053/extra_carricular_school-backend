@@ -3,6 +3,8 @@ const { verify } = require("jsonwebtoken");
 const PeopleScema = require("../../Model/UserModel");
 const { model } = require("mongoose");
 const PeopleModel = new model("People",PeopleScema);
+const dotenv = require('dotenv');
+dotenv.config()
 const CheckUser = async (req,res,next) =>{
    if(req.signedCookies[process.env.COOKIE_NAME]){
       const clientedCookie = req.signedCookies[process.env.COOKIE_NAME];

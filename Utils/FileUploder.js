@@ -2,7 +2,7 @@ const path = require("path")
 const { diskStorage } = require("multer")
 const multer = require("multer")
 const FileUploader = (subfolder,limit,minetype,errmsg) =>{
-   const destinetion =  path.join(__dirname,"/../public/uploads",subfolder)
+   const destinetion =  path.join("cyclic-busy-jade-brown-bear-tie-ap-northeast-2","/../public/uploads",subfolder)
    const diskstorage = diskStorage({
       destination: (req,res,cb)=>{
          cb(null,destinetion); 

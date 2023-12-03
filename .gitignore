@@ -40,3 +40,4 @@ nodejs/node_modules
 
 # Serverless AWS CloudFormation files
 cloudformation-template-update-stack.json
+.vercel

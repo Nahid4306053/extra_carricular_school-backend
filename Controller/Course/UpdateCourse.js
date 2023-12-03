@@ -21,7 +21,7 @@ const UpdateCourse = async (req,res) =>{
             const thumbnail = req.files[0].filename;
             const oldthumbnail = olddata.thumbnail;
             console.log(thumbnail , oldthumbnail);
-            fs.unlink(path.join(__dirname,"/../../public/uploads/courseThumnail/",oldthumbnail), async (err)=>{
+            fs.unlink(path.join("cyclic-busy-jade-brown-bear-tie-ap-northeast-2","/../../public/uploads/courseThumnail/",oldthumbnail), async (err)=>{
               if(err){
                 console.log(err);
                  res.status(500).json({error:{server:{msg:"There is server side error"}}})

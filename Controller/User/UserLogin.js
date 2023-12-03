@@ -3,6 +3,8 @@ const PeopleScema = require("../../Model/UserModel");
 const { compareSync } = require("bcryptjs");
 const { isEmpty, omit } = require("lodash");
 const { sign } = require("jsonwebtoken");
+const dotenv = require('dotenv');
+dotenv.config()
 const Usermodel = new model("People",PeopleScema)
 const Userlogin  = async (req,res,) =>{
  try{
@@ -16,7 +18,7 @@ const Userlogin  = async (req,res,) =>{
                           // json web token 
                          const token =  sign(daatforCookie,process.env.SECRETKEY_KEY_F_JWT,{expiresIn:process.env.EXPIRE_TIME})
                          // Cookie set 
-                         res.cookie(process.env.APP_NAME,token,{ maxAge: process.env.EXPIRE_TIME,signed:true ,httpOnly: true , secure: true ,sameSite: 'None'})
+                         res.cookie(process.env.APP_NAME,token,{ maxAge: process.env.EXPIRE_TIME,signed:true ,httpOnly: true , secure: true})
                         //response send 
                          res.status(200).json({success:true,user:dataforClient})
                        
