@@ -17,8 +17,8 @@ const course = express.Router();
 
 // routes  
 
-course.post("/", CheckUser,CheckRole, ThumnailUploder,CourseDataValidetion , courseDatavalidetionResult ,addcourse) 
-course.put("/:id", CheckUser,CheckRole, ThumnailUploder,CourseDataValidetion , courseDatavalidetionResult ,UpdateCourse)
+course.post("/", CheckUser,CheckRole, CourseDataValidetion , courseDatavalidetionResult ,ThumnailUploder , addcourse) 
+course.put("/:id", CheckUser,CheckRole, CourseDataValidetion , courseDatavalidetionResult , ThumnailUploder,UpdateCourse)
 course.get("/singel/:id", CheckUser ,singleCourse ) 
 course.get("/all",CheckUser, Allcourse )
 course.put("/status/:id",CheckUser,CheckRole,CourseStatusUpdate)

@@ -15,6 +15,7 @@ const addcourse = async (req,res) =>{
     const dataforDatabase = {...req.body,thumbnail:thumbnail,instructors:instructors,benifits:JSON.parse(req.body.benifits)}
     const result = await CourseModel(dataforDatabase).save();
     const finalresult = await CourseModel.findById(result.id).populate({ path: "instructors", select: "username _id avatar" })
+    
     res.status(200).json({success:true,data:finalresult })
 
   }      

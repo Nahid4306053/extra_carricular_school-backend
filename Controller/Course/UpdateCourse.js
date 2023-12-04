@@ -20,7 +20,7 @@ const UpdateCourse = async (req,res) =>{
             if(req.files.length > 0){
             const thumbnail = req.files[0].filename;
             const oldthumbnail = olddata.thumbnail;
-            console.log(thumbnail , oldthumbnail);
+         
             fs.unlink(path.join("cyclic-busy-jade-brown-bear-tie-ap-northeast-2","/../../public/uploads/courseThumnail/",oldthumbnail), async (err)=>{
               if(err){
                 console.log(err);

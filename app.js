@@ -4,6 +4,7 @@ const app = express()
 const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
+const multer = require("multer")
 // dotenv config
 dotenv.config()  
 
@@ -40,20 +41,28 @@ app.use(cookieParser(process.env.SECRETKEY_KEY_F_COOKIE))
 // app static  
 app.use(express.static("cyclic-busy-jade-brown-bear-tie-ap-northeast-2" + "/public"))
      
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+
+app.use(upload.any());
+
 app.use("/user", require("./Routes/User"))
 
 app.use("/course", require("./Routes/Course"))
-app.get("/",(req,res)=>{
+ 
+app.get("/",(req,res)=>{ 
     res.send("Server is running")
 })
-app.use((req,res,next,err)=>{
-   if(err){
-    console.log(err)
-   }  
-   else{
-    next()
-   }
-})
+app.use((err, req, res, next) => {
+    res.status(err.status || 500).json({
+      error: {
+        status: err.status || 500,
+        message: err.message || 'Internal Server Error',
+     },
+   });
+});
+
 app.listen(process.env.PORT_DATABASE, () => {
     console.log("Server is running on port " + process.env.PORT_DATABASE)
 })
