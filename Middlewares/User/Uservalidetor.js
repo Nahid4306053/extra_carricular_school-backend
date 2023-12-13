@@ -35,19 +35,13 @@ const  Uservalidetion = [
 
 const uservalidetionResult = (req,res,next) =>{
           const error   =  validationResult(req);
-          if(!error.isEmpty()){ 
-           const mappedError = error.mapped()
-           fs.unlink(`${"cyclic-busy-jade-brown-bear-tie-ap-northeast-2"+filedestinetion+req.files[0].filename}`,(err)=>{
-            if(err){  
-               res.status(500).json({error:{server:{msg:"There is server side"}}})     
-            }
-            else{
-             res.status("200").json({
+          const mappedError = error.mapped()
+          if(!error.isEmpty()){
+             res.status(200).json({
                   error:mappedError
-             })       
-            }
+          
            })
-          }
+         }
           else{ 
              next()
           }

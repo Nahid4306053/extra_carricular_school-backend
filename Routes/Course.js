@@ -2,7 +2,7 @@
 const express = require("express");
 const { CheckUser } = require("../Middlewares/Commmon/Checkuser");
 const { addcourse } = require("../Controller/Course/AddCourse");
-const ThumnailUploder = require("../Controller/Course/ThumnailUploder");
+
 const { CourseDataValidetion, courseDatavalidetionResult } = require("../Middlewares/Course/CourseDataValidetion");
 const Allcourse = require("../Controller/Course/Coures.All");
 const { update } = require("lodash");
@@ -17,8 +17,8 @@ const course = express.Router();
 
 // routes  
 
-course.post("/", CheckUser,CheckRole, CourseDataValidetion , courseDatavalidetionResult ,ThumnailUploder , addcourse) 
-course.put("/:id", CheckUser,CheckRole, CourseDataValidetion , courseDatavalidetionResult , ThumnailUploder,UpdateCourse)
+course.post("/", CheckUser,CheckRole, CourseDataValidetion , courseDatavalidetionResult ,  addcourse) 
+course.put("/:id", CheckUser,CheckRole, CourseDataValidetion , courseDatavalidetionResult , UpdateCourse)
 course.get("/singel/:id", CheckUser ,singleCourse ) 
 course.get("/all",CheckUser, Allcourse )
 course.put("/status/:id",CheckUser,CheckRole,CourseStatusUpdate)

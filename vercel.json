@@ -9,12 +9,11 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "app.js",
+      "dest": "/app.js",
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
       "headers": {
         "Content-Security-Policy": "default-src 'none'; img-src 'self' data:;"
       }
     }
   ]
-
 }

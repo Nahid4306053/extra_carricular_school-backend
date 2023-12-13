@@ -9,7 +9,7 @@ const UpdateCourse = async (req,res) =>{
        if(req.params.id){
      
        try{   
-         const olddata = await CourseModel.findById({_id:req.params.id}).select('thumbnail');
+   
          let instructors = [];
          if(req.body.instructors.length > 0){
             JSON.parse(req.body.instructors).forEach(element => {
@@ -17,30 +17,10 @@ const UpdateCourse = async (req,res) =>{
             });
            }
 
-            if(req.files.length > 0){
-            const thumbnail = req.files[0].filename;
-            const oldthumbnail = olddata.thumbnail;
-         
-            fs.unlink(path.join("cyclic-busy-jade-brown-bear-tie-ap-northeast-2","/../../public/uploads/courseThumnail/",oldthumbnail), async (err)=>{
-              if(err){
-                console.log(err);
-                 res.status(500).json({error:{server:{msg:"There is server side error"}}})
-               }
-             else{
-              const   dataforDatabase =   {...req.body,thumbnail:req.files[0].filename,instructors:instructors,benifits:JSON.parse(req.body.benifits)} ;
-              const result = await CourseModel.findByIdAndUpdate({_id:req.params.id},dataforDatabase,{new:true}).populate({ path: "instructors", select: "username _id avatar" });
-              res.status(200).json({sucess:true,data:result});
-             }
-          }) 
-           
-       } 
-           else{
             const  dataforDatabase =   {...req.body,instructors:instructors,benifits:JSON.parse(req.body.benifits)}
             const result = await CourseModel.findByIdAndUpdate({_id:req.params.id},dataforDatabase,{new:true}).populate({ path: "instructors", select: "username _id avatar" });
             res.status(200).json({sucess:true,data:result});
-           }
-
-         
+           
 
   }    
    catch(err){

@@ -2,15 +2,12 @@ const bcrypt = require("bcryptjs");
 const { model } = require("mongoose");
 const PeopleScema = require("../../Model/UserModel");
 const { isEmpty } = require("lodash");
-const Peolemodel = model("People",PeopleScema)
+const Peoplemodel = model("People",PeopleScema)
 async function  UserSignUp(req,res){
    var salt = bcrypt.genSaltSync(10);
    var hash = bcrypt.hashSync(req.body.password, salt);
-   const dataforDatabase = {
-    ...req.body, 
-    avatar : req.files[0].filename,password:hash
-   }
-   const newuser = await Peolemodel(dataforDatabase);
+   req.body.password = hash
+   const newuser = await Peoplemodel(req.body);
    const response = await newuser.save()
    if(!isEmpty(response)){
       delete response['password'];
@@ -20,6 +17,7 @@ async function  UserSignUp(req,res){
      })
    }
    else{
+      console.log(response);
       res.status(500).json({
          error:{
             server:{

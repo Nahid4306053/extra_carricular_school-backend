@@ -9,24 +9,17 @@ const multer = require("multer")
 dotenv.config()  
 
 // mongoose conection is promise
-mongoose.connect(process.env.MONGODB_URI).then(()=>{
-    console.log("Database connnetion successfull")
-})
+// Set up CORS configuration
 
-//Set for cros origin 
 app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', ['http://localhost:5173']);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH');
-    res.header('Access-Control-Allow-Headers', ['Content-Type']); 
-    next();
-  });
-  
-// cors origin set 
-app.use(cors({
-    origin: ['http://localhost:5173'],
-    credentials: true,
-    sameSite: 'none'
-}));
+  res.header('Access-Control-Allow-Origin', ['http://localhost:5173','https://nahider-school.netlify.app']);
+  res.header('Access-Control-Allow-Methods', '*');
+  res.header('Access-Control-Allow-Headers', '*');
+  next();
+});
+
+
+app.use( cors({ origin: ['http://localhost:5173',"https://nahider-school.netlify.app"], credentials: true, }) );
 
 
 // use json formet 
@@ -39,7 +32,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser(process.env.SECRETKEY_KEY_F_COOKIE))
 
 // app static  
-app.use(express.static("cyclic-busy-jade-brown-bear-tie-ap-northeast-2" + "/public"))
+app.use(express.static("/public"));
      
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
@@ -47,7 +40,7 @@ const upload = multer({ storage: storage });
 
 app.use(upload.any());
 
-app.use("/user", require("./Routes/User"))
+app.use("/user", require("./Routes/User")) 
 
 app.use("/course", require("./Routes/Course"))
  
@@ -63,6 +56,11 @@ app.use((err, req, res, next) => {
    });
 });
 
-app.listen(process.env.PORT_DATABASE, () => {
+mongoose.connect(process.env.MONGODB_URI).then(()=>{
+  console.log("Database connnetion successfull")
+  app.listen(process.env.PORT_DATABASE, () => {
     console.log("Server is running on port " + process.env.PORT_DATABASE)
 })
+})
+
+module.exports = app;

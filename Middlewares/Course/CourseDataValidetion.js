@@ -34,18 +34,10 @@ const CourseDataValidetion = [
 const courseDatavalidetionResult = (req, res, next) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {
-        const filename = req.files[0].filename;
-        fs.unlink(path.join("cyclic-busy-jade-brown-bear-tie-ap-northeast-2", "/../../public/uploads/courseThumnail/", filename), (err) => {
-            if (err) {
-                res.status("200").json({error:{server:{msg:"Three are a server side error"}}})
-                console.log(err)
-            } else {
-                const mappedErrors = errors.mapped()
-                res.status(200).json({
-                    error: mappedErrors
-                })
-            }
-        })
+    const mappedErrors = errors.mapped()
+     res.status(200).json({
+         error: mappedErrors
+     })
 
     } else {
         next()
